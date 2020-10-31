@@ -148,8 +148,7 @@ class GCLSTM(torch.nn.Module):
         T = T + self.conv_c(H, edge_index, edge_weight)
         T = T + self.b_c
         T = torch.tanh(T)
-        C = F*C + I*T
-        return C
+        return F*C + I*T
 
     def _calculate_output_gate(self, X, edge_index, edge_weight, H, C):
         O = torch.matmul(X, self.W_o)
@@ -160,8 +159,7 @@ class GCLSTM(torch.nn.Module):
 
 
     def _calculate_hidden_state(self, O, C):
-        H = O * torch.tanh(C)
-        return H
+        return O * torch.tanh(C)
 
 
     def forward(self, X: torch.FloatTensor, edge_index: torch.LongTensor, edge_weight: torch.FloatTensor=None,

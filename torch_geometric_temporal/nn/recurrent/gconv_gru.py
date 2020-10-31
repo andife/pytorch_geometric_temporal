@@ -125,8 +125,7 @@ class GConvGRU(torch.nn.Module):
 
 
     def _calculate_hidden_state(self, Z, H, H_tilde):
-        H = Z*H + (1-Z)*H_tilde
-        return H
+        return Z*H + (1-Z)*H_tilde
 
 
     def forward(self, X: torch.FloatTensor, edge_index: torch.LongTensor,
