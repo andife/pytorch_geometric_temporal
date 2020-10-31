@@ -115,8 +115,7 @@ class LRGCN(torch.nn.Module):
         T = self.conv_x_c(X, edge_index, edge_type)
         T = T + self.conv_h_c(H, edge_index, edge_type)
         T = torch.tanh(T)
-        C = F*C + I*T
-        return C
+        return F*C + I*T
 
 
     def _calculate_output_gate(self, X, edge_index, edge_type, H, C):
@@ -127,8 +126,7 @@ class LRGCN(torch.nn.Module):
 
 
     def _calculate_hidden_state(self, O, C):
-        H = O * torch.tanh(C)
-        return H
+        return O * torch.tanh(C)
 
 
     def forward(self, X: torch.FloatTensor, edge_index: torch.LongTensor, edge_type: torch.LongTensor,
